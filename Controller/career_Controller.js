@@ -1,4 +1,4 @@
-const {Career,CUD} = require('../Model/career_Model')
+const {Career, CareerUserDetail} = require('../Model/career_Model')
 // const CUD = require('../Model/career_Model')
 
 //create a career 
@@ -23,7 +23,7 @@ exports.createCareer = async(req,res)=> {
 exports.createCareerUserDetails = async(req,res)=>{
     try {
         const {name, email, mobile, location, salary, exp, role} = req.body;
-        const careerUser = await CUD.create({
+        const careerUser = await CareerUserDetail.create({
             name, email, mobile, location, salary, exp, role
         });
         res.status(200).json(careerUser);
