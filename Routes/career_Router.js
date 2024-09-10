@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const {authenticatetoken} = require('./Middleware/validateToken')
 const {createCareer, getCareer, createCareerUserDetails} = require('../Controller/career_Controller')
 
 //create career (for admin)
- router.post('/create', createCareer);
+ router.post('/create',authenticatetoken, createCareer);
 
 //get career (user page)
  router.get('/get', getCareer);

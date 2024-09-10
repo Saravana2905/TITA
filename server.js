@@ -4,7 +4,7 @@ const contactRoute = require('./Routes/contact_Router');
 const careerRoute = require('./Routes/career_Router');
 const adminRoute = require('./Routes/admin_route');
 const blogRoute = require('./Routes/blog_route');
-const {authenticatetoken} = require('./Middleware/validateToken')
+
 const app = express();
 const cors = require('cors')
 
@@ -18,7 +18,7 @@ app.use(cors(corsOptions))
 
 // for understanding the given input is in json
 app.use(express.json());
-app.use(authenticatetoken);
+// app.use(authenticatetoken);
 
 //Route
  app.use('/contact', contactRoute);
