@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {createBlog , getBlogs} = require('../Controller/blog_Controller')
-const {authenticatetoken} = require('./Middleware/validateToken')
+const {authenticatetoken} = require('./Middleware/validateToken.js')
 const upload = require('../Middleware/multer')
 
 //create blog
