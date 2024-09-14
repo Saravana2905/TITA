@@ -5,8 +5,8 @@ const authenticatetoken = require('../Middleware/validateToken')
 const upload = require('../Middleware/multer')
 
 //create blog
- router.post('/create',authenticatetoken,upload.array('image',10), createBlog);
-
+ router.post('/create',upload.array('image',10), createBlog);
+//  ,authenticatetoken
 //get blog
  router.get('/get', getBlogs);
 

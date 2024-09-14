@@ -33,9 +33,9 @@ mongoose.
 connect('mongodb+srv://admin:admin123@cluster0.mbkdi.mongodb.net/TITA?retryWrites=true&w=majority&appName=Cluster0')
 .then(() => {
     console.log('connected to MongoDB')
-    app.listen(3000, ()=> {
-        console.log(`Node API app is running on port 3000`)
-        console.log(`http://localhost:3000`)
+    app.listen(4000, ()=> {
+        console.log(`Node API app is running on port 4000`)
+        console.log(`http://localhost:4000`)
     });
 }).catch((error) => {
     console.log(error)
