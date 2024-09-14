@@ -5,7 +5,7 @@ const {createCareer, getCareer, createCareerUserDetails} = require('../Controlle
 
 //create career (for admin)
  router.post('/create',authenticatetoken, createCareer);
-
+//  ,authenticatetoken
 //get career (user page)
  router.get('/get', getCareer);
 
