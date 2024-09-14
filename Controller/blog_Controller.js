@@ -52,9 +52,11 @@ exports.createBlog = async (req, res) => {
 exports.getBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find();
+    const totalBlogs = blogs.length;
 
     res.status(200).json({
       success: true,
+      totalBlogs,
       blogs
     });
   } catch (error) {
