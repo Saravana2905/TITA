@@ -1,17 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const {createContact, getContact} = require('../Controller/contact_Controller')
+const {createContact, getContact, deleteContact} = require('../Controller/contact_Controller')
 
-//create product
+//create contact
  router.post('/create', createContact);
 
-// //get students
+// //get contact
  router.get('/get', getContact);
 
-
-
-
-
+// delete contact
+router.get('/delete/:id',deleteContact);
 
 
 //export router to controller
