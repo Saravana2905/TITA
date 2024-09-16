@@ -38,6 +38,20 @@ exports.createCareerUserDetails = async (req, res) => {
   }
 };
 
+// get career user details
+exports.getCareer = async (req, res) => {
+  try {
+    const career = await CareerUserDetail.find({});
+    const totalCareerUserDetail = await CareerUserDetail.countDocuments(); // Await the countDocuments function
+    res.status(200).json({ totalCareerUserDetail, career });
+  } catch (error) {
+    console.error("Error getting career User details:", error.message);
+    res.status(500).send("Error getting career user details");
+  }
+};
+
+
+
 // get career
 exports.getCareer = async (req, res) => {
     try {
