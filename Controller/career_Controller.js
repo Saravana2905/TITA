@@ -39,7 +39,7 @@ exports.createCareerUserDetails = async (req, res) => {
 };
 
 // get career user details
-exports.getCareer = async (req, res) => {
+exports.getCareerUserDetails = async (req, res) => {
   try {
     const career = await CareerUserDetail.find({});
     const totalCareerUserDetail = await CareerUserDetail.countDocuments(); // Await the countDocuments function
