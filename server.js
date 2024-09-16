@@ -18,6 +18,10 @@ app.use(cors(corsOptions))
 
 // for understanding the given input is in json
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+
 // app.use(authenticatetoken);
 
 //Route
