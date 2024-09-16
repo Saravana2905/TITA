@@ -22,7 +22,7 @@ exports.createContact = async(req,res)=> {
 exports.getContact = async(req,res)=> {
     try {
         const contact = await Contact.find({});
-        const totalContact = Contact.length;
+        const totalContact = await Contact.countDocuments();
         res.status(200).json({totalContact,contact})
     } catch (error) {
         console.error("Error getting message:", error.message);
