@@ -22,8 +22,8 @@ exports.createContact = async(req,res)=> {
 exports.getContact = async(req,res)=> {
     try {
         const contact = await Contact.find({});
-        const totalCareer = Contact.length;
-        res.status(200).json({totalCareer,contact})
+        const totalContact = Contact.length;
+        res.status(200).json({totalContact,contact})
     } catch (error) {
         console.error("Error getting message:", error.message);
         res.status(500).send("Error getting message");
