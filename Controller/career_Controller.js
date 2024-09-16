@@ -42,7 +42,8 @@ exports.createCareerUserDetails = async (req, res) => {
 exports.getCareer = async (req, res) => {
   try {
     const career = await Career.find({});
-    res.status(200).json(career);
+    const totalCareer = Career.length;
+    res.status(200).json({totalCareer,career});
   } catch (error) {
     console.error("Error getting career:", error.message);
     res.status(500).send("Error getting career");
