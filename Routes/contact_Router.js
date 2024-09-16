@@ -9,7 +9,7 @@ const {createContact, getContact, deleteContact} = require('../Controller/contac
  router.get('/get', getContact);
 
 // delete contact
-router.get('/delete/:id',deleteContact);
+router.delete('/delete/:id',deleteContact);
 
 
 //export router to controller
