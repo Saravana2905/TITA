@@ -5,7 +5,7 @@ const authenticatetoken = require('../Middleware/validateToken')
 const upload = require('../Middleware/multer')
 
 //create blog
- router.post('/create',upload.array('image',10), createBlog);
+ router.post('/create',authenticatetoken,upload.array('image',10), createBlog);
 //  ,authenticatetoken
 
 //get blog
@@ -15,9 +15,9 @@ const upload = require('../Middleware/multer')
  router.get('/get/:id', getBlogsById);
 
 //delete blog
-router.delete('/delete-blog/:id', deleteBlogs);
+router.delete('/delete-blog/:id',authenticatetoken, deleteBlogs);
 
 //update Blog
-router.put('/update-blog/:id',upload.array('image',10), updateBlog)
+router.put('/update-blog/:id',authenticatetoken,upload.array('image',10), updateBlog)
 
 module.exports = router;
