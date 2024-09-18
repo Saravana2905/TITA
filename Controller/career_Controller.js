@@ -51,6 +51,23 @@ exports.getCareerUserDetails = async (req, res) => {
 };
 
 
+//delete career user details
+
+exports.deleteCareerUserDetails = async (req,res) =>{
+  try {
+    const {id} = req.params;
+    const career = await CareerUserDetail.findByIdAndDelete(id);
+    if (!career){
+      return res.status(404).json({ message: `cannot find by id ${id}` });
+    }
+    res.status(200).json(career);
+  } catch (error) {
+    console.error("Error getting career User details:", error.message);
+    res.status(500).send("Error getting career user details");
+  }
+}
+
+
 
 // get career
 exports.getCareer = async (req, res) => {

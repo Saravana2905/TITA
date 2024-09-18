@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const authenticatetoken = require('../Middleware/validateToken')
-const {createCareer, getCareer, createCareerUserDetails, deleteCareer, updateCareer, getCareerUserDetails} = require('../Controller/career_Controller')
+const {createCareer, getCareer, createCareerUserDetails, deleteCareer, updateCareer, getCareerUserDetails, deleteCareerUserDetails} = require('../Controller/career_Controller')
 
 //create career (for admin)
  router.post('/create', createCareer);
@@ -14,6 +14,9 @@ router.post('/createUserdetails', createCareerUserDetails)
 
 //get career user details
 router.get('/career-user-details', getCareerUserDetails)
+
+//delete career user details
+router.delete('/career-user-details/delete/:id', deleteCareerUserDetails)
 
 //delte career 
 router.delete('/delete-career/:id',deleteCareer);
