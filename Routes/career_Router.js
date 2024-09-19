@@ -13,16 +13,16 @@ const {createCareer, getCareer, createCareerUserDetails, deleteCareer, updateCar
 router.post('/createUserdetails', createCareerUserDetails)
 
 //get career user details
-router.get('/career-user-details',authenticatetoken, getCareerUserDetails)
+router.get('/career-user-details', getCareerUserDetails)
 
 //delete career user details
-router.delete('/career-user-details/delete/:id',authenticatetoken, deleteCareerUserDetails)
+router.delete('/career-user-details/delete/:id', deleteCareerUserDetails)
 
 //delte career 
-router.delete('/delete-career/:id',authenticatetoken,deleteCareer);
+router.delete('/delete-career/:id',deleteCareer);
 
 //update career
-router.put('/update-career/:id',authenticatetoken, updateCareer)
+router.put('/update-career/:id', updateCareer)
 
 //export router to controller
 module.exports = router;
