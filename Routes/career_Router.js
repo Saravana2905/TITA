@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const authenticatetoken = require('../Middleware/validateToken')
+// const authenticatetoken = require('../Middleware/validateToken')
 const {createCareer, getCareer, createCareerUserDetails, deleteCareer, updateCareer, getCareerUserDetails, deleteCareerUserDetails} = require('../Controller/career_Controller')
 
 //create career (for admin)
