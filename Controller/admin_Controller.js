@@ -1,9 +1,9 @@
 const Admin = require('../Model/admin_Model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-// Secret key for JWT
-const JWT_SECRET = 'saravana';
+
 
 // Admin create
 exports.createAdmin = async (req, res) => {
@@ -41,7 +41,7 @@ exports.loginAdmin = async (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: admin._id, email: admin.email }, JWT_SECRET, { expiresIn: '30d' });
+        const token = jwt.sign({ id: admin._id, email: admin.email }, process.env.JWT_SECRET_ADMIN, { expiresIn: '30d' });
 
         // Send response with JWT
         res.status(200).json({
