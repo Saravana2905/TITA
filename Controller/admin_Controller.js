@@ -8,15 +8,27 @@ require('dotenv').config();
 // Admin create
 exports.createAdmin = async (req, res) => {
     try {
-        const { uname, password, phone, email } = req.body;
+        const { email, password   } = req.body;
+
+        // Validate that password is provided
+        if (!password) {
+            return res.status(400).json({ message: "Password is required" });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const admin = await Admin.create({
-            uname,
-            password: hashedPassword,
-            phone,
-            email
+            email,
+            password: hashedPassword
         });
-        res.status(200).json(admin);
+
+        // Generate JWT token after admin creation
+        const token = jwt.sign({ id: admin._id, email: admin.email }, process.env.JWT_SECRET_ADMIN, { expiresIn: '30d' });
+
+        // Send response with admin details and JWT
+        res.status(200).json({
+            admin,
+            token
+        });
     } catch (error) {
         console.error("Error creating admin:", error.message);
         res.status(500).send("Error creating admin");
@@ -40,13 +52,9 @@ exports.loginAdmin = async (req, res) => {
             return res.status(401).json({ message: "Invalid password" });
         }
 
-        // Generate JWT token
-        const token = jwt.sign({ id: admin._id, email: admin.email }, process.env.JWT_SECRET_ADMIN, { expiresIn: '30d' });
-
-        // Send response with JWT
+        // Send response without JWT
         res.status(200).json({
-            message: "Login successful",
-            token
+            message: "Login successful"
         });
     } catch (error) {
         console.error("Error logging in admin:", error.message);

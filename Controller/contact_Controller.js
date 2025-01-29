@@ -3,13 +3,12 @@ const Contact = require('../Model/contact_Model')
 //create a contact 
 exports.createContact = async(req,res)=> {
     try {
-        const {name, email, mobile, service, message} = req.body;
+        const {name, email, mobile, message} = req.body;
 
         const contact = await Contact.create({
             name,
             email,
             mobile,
-            service,
             message
         });
         res.status(200).json(contact)
