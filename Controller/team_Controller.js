@@ -14,6 +14,12 @@ exports.createTeam = async (req, res) => {
 
       const { sno, Name, Position, Experience, ExperienceNo, Key_responsibilities, Specialization, Vision, instagram, facebook, linkedin } = req.body;
 
+      // Check if a team member with the same sno already exists
+      const existingTeamMember = await team.findOne({ sno });
+      if (existingTeamMember) {
+        return res.status(400).json({ message: 'Team member with this serial number already exists' });
+      }
+
       // Construct the image URL
       const imageUrl = `${req.protocol}://${req.get('host')}/tita/${req.file.filename}`;
 
@@ -28,8 +34,8 @@ exports.createTeam = async (req, res) => {
         Specialization,
         Vision,
         Image: imageUrl,
-        instagram, 
-        facebook, 
+        instagram,
+        facebook,
         linkedin
       });
 
