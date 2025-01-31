@@ -1,10 +1,12 @@
 const Blog = require("../Model/blog_Model");
-const cloudinary = require("../cloudinary");
-const fs = require("fs");
+const upload = require("../Middleware/multer  "); // Import Multer configuration
+const path = require('path');
 
+// Create Blog
 exports.createBlog = async (req, res) => {
   try {
     const { title, desc } = req.body;
+
     // Check if files are uploaded
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: "No files uploaded" });
@@ -19,12 +21,9 @@ exports.createBlog = async (req, res) => {
         return res.status(404).json({ error: `File not found: ${filePath}` });
       }
 
-      const result = await cloudinary.uploader.upload(filePath);
-
-      uploadedUrls.push(result.secure_url);
-
-      // Delete the file from the local server
-      fs.unlinkSync(filePath);
+      // Construct the image URL
+      const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${path.basename(filePath)}`;
+      uploadedUrls.push(imageUrl);
     }
 
     const blog = await Blog.create({
@@ -34,21 +33,20 @@ exports.createBlog = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "Images uploaded to Cloudinary and blog created successfully",
+      message: "Images uploaded to local storage and blog created successfully",
       blog,
-      urls: uploadedUrls, // Array
+      urls: uploadedUrls, // Array of image URLs
     });
   } catch (error) {
-    // Error handling
-    console.error("Error during image upload:", error.message);
+    console.error("Error during blog creation:", error.message);
     res.status(500).json({
-      error: "Image upload to Cloudinary failed",
+      error: "Blog creation failed",
       details: error.message,
     });
   }
 };
 
-//get blogs
+// Get All Blogs
 exports.getBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find();
@@ -57,7 +55,7 @@ exports.getBlogs = async (req, res) => {
     res.status(200).json({
       success: true,
       totalBlogs,
-      blogs
+      blogs,
     });
   } catch (error) {
     console.error("Error fetching blogs:", error.message);
@@ -68,45 +66,54 @@ exports.getBlogs = async (req, res) => {
   }
 };
 
-
-//get blogs
+// Get Blog by ID
 exports.getBlogsById = async (req, res) => {
   try {
-    const {id} = req.params;
-    const blogs = await Blog.findById(id);
+    const { id } = req.params;
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: `Blog not found with id ${id}` });
+    }
+
     res.status(200).json({
       success: true,
-      blogs
+      blog,
     });
   } catch (error) {
-    console.error("Error fetching blogs:", error.message);
+    console.error("Error fetching blog:", error.message);
     res.status(500).json({
       success: false,
-      message: "Error fetching blogs",
+      message: "Error fetching blog",
     });
   }
 };
 
-
-//delete
+// Delete Blog
 exports.deleteBlogs = async (req, res) => {
   try {
     const { id } = req.params;
-    const blogs = await Blog.findByIdAndDelete(id);
-    if (!blogs) {
-      return res.status(404).json({message: `cannot find by id ${id}`})
+    const blog = await Blog.findByIdAndDelete(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: `Cannot find blog with id ${id}` });
     }
-    res.status(200).json(blogs);
+
+    res.status(200).json({
+      success: true,
+      message: "Blog deleted successfully",
+      blog,
+    });
   } catch (error) {
+    console.error("Error deleting blog:", error.message);
     res.status(500).json({
       success: false,
-      message: "Error deleting blogs",
-    })
+      message: "Error deleting blog",
+    });
   }
 };
 
-
-//update blogs
+// Update Blog
 exports.updateBlog = async (req, res) => {
   try {
     const { id } = req.params;
@@ -130,13 +137,9 @@ exports.updateBlog = async (req, res) => {
           return res.status(404).json({ error: `File not found: ${filePath}` });
         }
 
-        // Upload new images to Cloudinary
-        const result = await cloudinary.uploader.upload(filePath);
-
-        uploadedUrls.push(result.secure_url);
-
-        // Delete the file from the local server after upload
-        fs.unlinkSync(filePath);
+        // Construct the image URL
+        const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${path.basename(filePath)}`;
+        uploadedUrls.push(imageUrl);
       }
 
       // Update the blog's images with the new URLs
