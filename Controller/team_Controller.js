@@ -60,6 +60,19 @@ exports.getAllTeam = async (req, res) =>{
     }
 }
 
+exports. getTeamById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const teamMember = await team.findById(id);
+        if (!teamMember) {
+            return res.status(404).json({ message: 'Team member not found' });
+        }
+        res.status(200).json({ success: true, data: teamMember });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+}
+
 exports.updateTeam = async (req, res) => {
   try {
     upload.single('Image')(req, res, async (err) => {
