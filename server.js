@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
  app.use('/admin', adminRoute);
  app.use('/blog', blogRoute);
 // Serve static files from the uploads folder
-app.use('/tita', express.static(uploadsPath));
+app.use('/tita', express.static(path.join(__dirname, '../../tita')));
 app.use('/team', teamRoute);
 
 
