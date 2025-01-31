@@ -20,7 +20,7 @@ var corsOptions = {
 app.use(cors(corsOptions))
 
 // Path to the uploads folder two levels up
-const uploadsPath = path.join(__dirname, '../../uploads');
+const uploadsPath = path.join(__dirname, '../../tita');
 
 // for understanding the given input is in json
 app.use(express.json());
@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
  app.use('/admin', adminRoute);
  app.use('/blog', blogRoute);
 // Serve static files from the uploads folder
-app.use('/uploads', express.static(uploadsPath));
+app.use('/tita', express.static(uploadsPath));
 app.use('/team', teamRoute);
 
 

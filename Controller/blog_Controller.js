@@ -1,6 +1,7 @@
 const Blog = require("../Model/blog_Model");
 const upload = require("../Middleware/multer"); // Import Multer configuration
 const path = require('path');
+const fs = require('fs');
 
 // Create Blog
 exports.createBlog = async (req, res) => {
@@ -22,7 +23,7 @@ exports.createBlog = async (req, res) => {
       }
 
       // Construct the image URL
-      const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${path.basename(filePath)}`;
+      const imageUrl = `${req.protocol}://${req.get('host')}/tita/${path.basename(filePath)}`;
       uploadedUrls.push(imageUrl);
     }
 

@@ -15,7 +15,7 @@ exports.createTeam = async (req, res) => {
       const { sno, Name, Position, Experience, ExperienceNo, Key_responsibilities, Specialization, Vision, instagram, facebook, linkedin } = req.body;
 
       // Construct the image URL
-      const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+      const imageUrl = `${req.protocol}://${req.get('host')}/tita/${req.file.filename}`;
 
       // Create new team member
       const newTeamMember = new team({

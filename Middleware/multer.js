@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Path to the uploads folder two levels up
-const uploadsPath = path.join(__dirname, '../../uploads');
+const uploadsPath = path.join(__dirname, '../../tita');
 
 // Create the uploads folder if it doesn't exist
 if (!fs.existsSync(uploadsPath)) {
