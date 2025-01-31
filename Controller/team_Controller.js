@@ -21,7 +21,7 @@ exports.createTeam = async (req, res) => {
       }
 
       // Construct the image URL
-      const imageUrl = `${req.protocol}://${req.get('host')}/tita/${req.file.filename}`;
+      const imageUrl = `https://tita.itrain.io/tita/${req.file.filename}`;
 
       // Create new team member
       const newTeamMember = new team({
@@ -99,7 +99,7 @@ exports.updateTeam = async (req, res) => {
 
       // If a new image is uploaded, update the image URL
       if (req.file) {
-        const newImageUrl = `${req.protocol}://${req.get('host')}/tita/${req.file.filename}`;
+        const newImageUrl = `https://tita.itrain.io/tita/${req.file.filename}`;
         existingTeamMember.Image = newImageUrl;
       }
 

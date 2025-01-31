@@ -23,7 +23,7 @@ exports.createBlog = async (req, res) => {
       }
 
       // Construct the image URL
-      const imageUrl = `${req.protocol}://${req.get('host')}/tita/${path.basename(filePath)}`;
+      const imageUrl = `https://tita.itrain.io/tita/${path.basename(filePath)}`;
       uploadedUrls.push(imageUrl);
     }
 
@@ -139,7 +139,7 @@ exports.updateBlog = async (req, res) => {
         }
 
         // Construct the image URL
-        const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${path.basename(filePath)}`;
+        const imageUrl = `https://tita.itrain.io/tita/${path.basename(filePath)}`;
         uploadedUrls.push(imageUrl);
       }
 
