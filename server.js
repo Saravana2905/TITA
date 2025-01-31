@@ -29,6 +29,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // app.use(authenticatetoken);
+app.get('/', (req, res) => {
+    res.send('Welcome to TITA API')
+})
 
 //Route
  app.use('/contact', contactRoute);
