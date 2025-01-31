@@ -51,10 +51,10 @@ exports.createTeam = async (req, res) => {
 
 exports.getAllTeam = async (req, res) =>{
     try {
-        const team = await team.find();
+        const teams = await team.find();
         res.status(200).json({success: true,
             message: "All Team Members data Fetched", 
-            data: team});
+            data: teams});
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });    
     }
