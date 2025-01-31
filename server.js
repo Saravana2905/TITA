@@ -4,6 +4,8 @@ const contactRoute = require('./Routes/contact_Router');
 const careerRoute = require('./Routes/career_Router');
 const adminRoute = require('./Routes/admin_route');
 const blogRoute = require('./Routes/blog_route');
+const teamRoute = require('./Routes/teamRoutes');
+const path = require('path');
 const port = 5000
 
 const app = express();
@@ -35,7 +37,7 @@ app.use(express.urlencoded({ extended: true }));
  app.use('/blog', blogRoute);
 // Serve static files from the uploads folder
 app.use('/uploads', express.static(uploadsPath));
-
+app.use('/team', teamRoute);
 
 
 mongoose.

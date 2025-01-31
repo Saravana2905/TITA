@@ -1,5 +1,5 @@
 const Blog = require("../Model/blog_Model");
-const upload = require("../Middleware/multer  "); // Import Multer configuration
+const upload = require("../Middleware/multer"); // Import Multer configuration
 const path = require('path');
 
 // Create Blog

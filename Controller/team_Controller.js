@@ -1,5 +1,5 @@
-const team = require('../models/teamModel');
-const upload = require('../config/multerConfig'); // Import Multer configuration
+const team = require('../Model/teamModel');
+const upload = require('../Middleware/multer'); // Import Multer configuration
 
 exports.createTeam = async (req, res) => {
   try {
@@ -12,7 +12,7 @@ exports.createTeam = async (req, res) => {
         return res.status(400).json({ message: 'No file uploaded' });
       }
 
-      const { sno, Name, Postion, Experience, ExperienceNo, Key_responsibilites, Specialization, Vision, instagram, facebook, linkedin } = req.body;
+      const { sno, Name, Position, Experience, ExperienceNo, Key_responsibilities, Specialization, Vision, instagram, facebook, linkedin } = req.body;
 
       // Construct the image URL
       const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
@@ -21,10 +21,10 @@ exports.createTeam = async (req, res) => {
       const newTeamMember = new team({
         sno,
         Name,
-        Postion,
+        Position,
         Experience,
         ExperienceNo,
-        Key_responsibilites,
+        Key_responsibilities,
         Specialization,
         Vision,
         Image: imageUrl,
