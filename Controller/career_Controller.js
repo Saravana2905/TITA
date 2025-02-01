@@ -21,7 +21,7 @@ exports.createCareer = async (req, res) => {
 //create career user details
 exports.createCareerUserDetails = async (req, res) => {
   try {
-    upload.single('file')(req, res, async (err) => {
+    upload.single('resume')(req, res, async (err) => {
       if (err) {
         return res.status(400).json({ message: err });
       }
@@ -29,7 +29,7 @@ exports.createCareerUserDetails = async (req, res) => {
       if (!req.file) {
         return res.status(400).json({ message: 'No file uploaded' });
       }
-    });
+    
     const { name, email, mobile, location, yourmessage, exp, role, address} = req.body;
 
     // Construct the image URL
@@ -47,8 +47,9 @@ exports.createCareerUserDetails = async (req, res) => {
       cv: fileurl,
     });
     res.status(200).json(careerUser);
+  });
   } catch (error) {
-    console.error("Error creating career:", error.message);
+    console.error("Error creating career:", error);
     res.status(500).send("Error creating career");
   }
 };
