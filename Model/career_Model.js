@@ -34,7 +34,7 @@ const careerUserdetailsSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    salary: {
+    yourmessage: {
         type: String,
         required: true
     },
@@ -43,6 +43,14 @@ const careerUserdetailsSchema = mongoose.Schema({
         required: true
     },
     role: {
+        type: String,
+        required: true
+    },
+    address:{
+        type: String,
+        required: true
+    },
+    cv:{
         type: String,
         required: true
     }

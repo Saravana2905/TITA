@@ -1,5 +1,5 @@
 const { Career, CareerUserDetail } = require("../Model/career_Model");
-// const CUD = require('../Model/career_Model')
+const upload = require('../Middleware/multer'); // Import Multer configuration
 
 //create a career
 exports.createCareer = async (req, res) => {
@@ -21,15 +21,30 @@ exports.createCareer = async (req, res) => {
 //create career user details
 exports.createCareerUserDetails = async (req, res) => {
   try {
-    const { name, email, mobile, location, salary, exp, role } = req.body;
+    upload.single('file')(req, res, async (err) => {
+      if (err) {
+        return res.status(400).json({ message: err });
+      }
+
+      if (!req.file) {
+        return res.status(400).json({ message: 'No file uploaded' });
+      }
+    });
+    const { name, email, mobile, location, yourmessage, exp, role, address} = req.body;
+
+    // Construct the image URL
+    const fileurl = `https://tita.itrain.io/tita/${req.file.filename}`;
+
     const careerUser = await CareerUserDetail.create({
       name,
       email,
       mobile,
       location,
-      salary,
+      yourmessage,
       exp,
       role,
+      address,
+      cv: fileurl,
     });
     res.status(200).json(careerUser);
   } catch (error) {
@@ -114,4 +129,4 @@ exports.updateCareer = async (req, res) => {
   };
   
 
-// module.exports = {createContact}
+
